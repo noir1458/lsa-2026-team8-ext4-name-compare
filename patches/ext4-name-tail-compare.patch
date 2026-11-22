@@ -1,0 +1,21 @@
+--- a/fs/ext4/namei.c
++++ b/fs/ext4/namei.c
+@@ -1407,6 +1407,18 @@
+ 					false);
+ 	}
+ #endif
++
++	/*
++	 * Same-length names often differ only near the end (file_00000001,
++	 * IMG_0001.jpg).  Reject such a mismatch by the last 8 bytes, which
++	 * compiles to one 64-bit compare.  Equality is still decided by the
++	 * full comparison below.
++	 */
++	if (!IS_ENCRYPTED(parent) && f.disk_name.name &&
++	    f.disk_name.len == de->name_len && de->name_len >= 8 &&
++	    memcmp(de->name + de->name_len - 8,
++		   f.disk_name.name + de->name_len - 8, 8))
++		return false;
+ 
+ 	return fscrypt_match_name(&f, de->name, de->name_len);
+ }

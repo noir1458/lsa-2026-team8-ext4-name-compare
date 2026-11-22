@@ -1,0 +1,15 @@
+{
+  "kernel": "5.4.214-b0",
+  "reps": 20,
+  "cpu": 0,
+  "seed": 102,
+  "command": "ls -l --color=never <dir>, LC_ALL=C TZ=UTC, stdout captured",
+  "cold": "drop_caches=2 before the run (dentries and inodes dropped, page cache kept)",
+  "warm": "same command immediately after the cold run",
+  "output_sha256": {
+    "short13": "0b00b19615e989d5d94fb8faf01dcd15f29f7159d1537248db84f5e37a1ff46b",
+    "varied": "ca55a23d42cabcf38763db9df0ca25016f8f1909a017b8266437e397ef07eb19",
+    "random128": "03d9fa50134300f8062e40d3b9ade10219c4be24e0d29a82c0a1713865cf6d7d",
+    "long128": "af890a2d3351011ffd1ad0afbbc78841dee0e670ca5378a30e31ccede3f05d95"
+  }
+}

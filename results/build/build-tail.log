@@ -1,0 +1,10 @@
+[16:56:42] revert p1
+patching file mm/readahead.c
+[16:56:42] compare every tarball file with the tree
+[16:57:33] apply tail patch
+patching file fs/ext4/namei.c
+[16:57:35] build tail
+[16:59:12] install tail
+[16:59:32] done
+checked 65708 files, differing 0
+67da225776695403e2aa2ddf751aac8c85070144cce98d7272b3ed30356c24bd  0004-tail-prefilter-only.patch
