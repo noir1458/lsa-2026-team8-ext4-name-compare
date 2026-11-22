@@ -1,0 +1,1 @@
+Linux vm 5.4.214-word #5 SMP Sun Nov 22 22:03:58 KST 2026 x86_64 x86_64 x86_64 GNU/Linux

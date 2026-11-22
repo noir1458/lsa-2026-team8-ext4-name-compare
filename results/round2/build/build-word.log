@@ -1,0 +1,23 @@
+[22:00:20] check tree: vanilla + tail patch only
+checked 65708 files, differing 1 ['fs/ext4/namei.c']
+[22:01:09] apply memcmp patch
+patching file lib/string.c
+[22:01:11] build 5.4.214-wordtail
+[22:02:45] install 5.4.214-wordtail
+[22:03:05] revert tail patch
+patching file fs/ext4/namei.c
+[22:03:06] build 5.4.214-word
+[22:04:46] install 5.4.214-word
+[22:05:03] check tree: vanilla + memcmp patch only
+checked 65708 files, differing 1 ['lib/string.c']
+84e8b15a72cb8e439dcbd7d6fafbca081380ffc7bd754bd08f781cd1cb528d12  ../memcmp-word-5.15.patch
+67da225776695403e2aa2ddf751aac8c85070144cce98d7272b3ed30356c24bd  ../ext4-name-tail-compare.patch
+24c24
+< CONFIG_LOCALVERSION="-tail"
+---
+> CONFIG_LOCALVERSION="-word"
+24c24
+< CONFIG_LOCALVERSION="-tail"
+---
+> CONFIG_LOCALVERSION="-wordtail"
+[22:05:39] done

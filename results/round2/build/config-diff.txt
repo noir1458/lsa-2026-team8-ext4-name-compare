@@ -1,0 +1,10 @@
+== config-5.4.214-b0 vs config-5.4.214-word
+24c24
+< CONFIG_LOCALVERSION="-b0"
+---
+> CONFIG_LOCALVERSION="-word"
+== config-5.4.214-b0 vs config-5.4.214-wordtail
+24c24
+< CONFIG_LOCALVERSION="-b0"
+---
+> CONFIG_LOCALVERSION="-wordtail"

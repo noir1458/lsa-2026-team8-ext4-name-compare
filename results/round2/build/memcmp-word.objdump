@@ -1,0 +1,25 @@
+0000000000000150 <memcmp>:
+ 150:	jmp    166 <memcmp+0x16>
+ 152:	mov    (%rdi),%rax
+ 155:	cmp    %rax,(%rsi)
+ 158:	jne    171 <memcmp+0x21>
+ 15a:	add    $0x8,%rdi
+ 15e:	add    $0x8,%rsi
+ 162:	sub    $0x8,%rdx
+ 166:	cmp    $0x7,%rdx
+ 16a:	ja     152 <memcmp+0x2>
+ 16c:	test   %rdx,%rdx
+ 16f:	je     18d <memcmp+0x3d>
+ 171:	xor    %ecx,%ecx
+ 173:	jmp    17e <memcmp+0x2e>
+ 175:	add    $0x1,%rcx
+ 179:	cmp    %rdx,%rcx
+ 17c:	je     18c <memcmp+0x3c>
+ 17e:	movzbl (%rdi,%rcx,1),%eax
+ 182:	movzbl (%rsi,%rcx,1),%r8d
+ 187:	sub    %r8d,%eax
+ 18a:	je     175 <memcmp+0x25>
+ 18c:	retq   
+ 18d:	xor    %eax,%eax
+ 18f:	retq   
+

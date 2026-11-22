@@ -1,0 +1,5 @@
+-----------I--e----- ~/lsa-ext4-name-compare/fixtures/leaf-mount/leaf/short13
+-----------I--e----- ~/lsa-ext4-name-compare/fixtures/leaf-mount/leaf/long128
+-----------I--e----- ~/lsa-ext4-name-compare/fixtures/leaf-mount/leaf/random128
+-----------I--e----- ~/lsa-ext4-name-compare/fixtures/leaf-mount/leaf/varied
+-----------I--e----- ~/lsa-ext4-name-compare/fixtures/leaf-mount/leaf/sametail

@@ -1,0 +1,186 @@
+{
+  "schema": 1,
+  "kernel": "5.4.214-wordtail",
+  "experiment_switch_present": false,
+  "fixture": "~/lsa-ext4-name-compare/fixtures/check-s1-wordtail/check-tail-bcebc08b97644096a57d664737a786de",
+  "files_per_directory": 1200,
+  "drop_caches": 2,
+  "edge_present": [
+    "aaaa_00000001",
+    "bbbb_00000001",
+    "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp00000001",
+    "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq00000001",
+    "12345678",
+    "12345679",
+    "1234567",
+    "x12345678"
+  ],
+  "edge_absent": [
+    "cccc_00000001",
+    "aaaa_00000002",
+    "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr00000001",
+    "12345670",
+    "y12345678",
+    "aaaa_0000000",
+    "aaaa_000000010",
+    "1234568"
+  ],
+  "result": "PASS",
+  "stages": [
+    {
+      "stage": "fixed_before",
+      "files": 2408,
+      "directory_counts": {
+        "src": 1208,
+        "dst": 1200
+      },
+      "content_name_nlink_sha256": "155fd226704069f43710922e1c368a6b3a17147ff62d262236bca4a45d282d22",
+      "identity_sha256": "beef0809f0b4715dd03a8abd6e3ccfd5b03fa2cbc229a9e4e19fca21e00bad3b",
+      "negative_checks": 32,
+      "verification_elapsed_ns": 198482265,
+      "drop_caches": 2
+    },
+    {
+      "stage": "fixed_rename",
+      "files": 2408,
+      "directory_counts": {
+        "src": 1208,
+        "dst": 1200
+      },
+      "content_name_nlink_sha256": "18e9758f852075a83d847f19bad8f65f5680cfd14cad77ac2cc354cffb8d0938",
+      "identity_sha256": "9926c669c7472284ec4fe883c023ba714af0a30fcb068aaaae3352c391272250",
+      "negative_checks": 33,
+      "verification_elapsed_ns": 214484486,
+      "drop_caches": 2
+    },
+    {
+      "stage": "fixed_hardlink",
+      "files": 2409,
+      "directory_counts": {
+        "src": 1209,
+        "dst": 1200
+      },
+      "content_name_nlink_sha256": "81d2945749cd2ccddf9f12a108064e2a89a6b6d937d051d79cabe5178c341b13",
+      "identity_sha256": "7cf74eb5a5d892e4c0179f0d429036c01ec93482ea49c9684dd7f4ce8a6b9e71",
+      "negative_checks": 32,
+      "verification_elapsed_ns": 193436347,
+      "drop_caches": 2
+    },
+    {
+      "stage": "fixed_unlink_original",
+      "files": 2408,
+      "directory_counts": {
+        "src": 1208,
+        "dst": 1200
+      },
+      "content_name_nlink_sha256": "65fe01ae0e9819f3611096c44151f447d7cd31bf3f6f032a6ff63e1f8670b30b",
+      "identity_sha256": "a0d0ae34d9cf83f5fc2fd73e1a9d2b5a9c967273109ee723779c03b445b4773c",
+      "negative_checks": 33,
+      "verification_elapsed_ns": 181048522,
+      "drop_caches": 2
+    },
+    {
+      "stage": "fixed_cross_rename",
+      "files": 2408,
+      "directory_counts": {
+        "src": 1207,
+        "dst": 1201
+      },
+      "content_name_nlink_sha256": "535c83c52c2d047cce8bea827e652f5a5204e6feded5f50a289227d8a8ecf4c2",
+      "identity_sha256": "1d017904218a4e6f81dc34e945df020e1bc757dca3870176d1204fd289c7f5e7",
+      "negative_checks": 33,
+      "verification_elapsed_ns": 155127940,
+      "drop_caches": 2
+    },
+    {
+      "stage": "fixed_replace_rename",
+      "files": 2408,
+      "directory_counts": {
+        "src": 1206,
+        "dst": 1202
+      },
+      "content_name_nlink_sha256": "5c5e9b18eedea2bb81daf0d0013a18ea3516f87da4d01508f2b41e8711eae8d2",
+      "identity_sha256": "44c4bea4c708f52a80ae710d0f783f138f77f853cf96d66269114a8e2ac28f0c",
+      "negative_checks": 33,
+      "verification_elapsed_ns": 209346743,
+      "drop_caches": 2
+    },
+    {
+      "stage": "fixed_unlink",
+      "files": 2407,
+      "directory_counts": {
+        "src": 1205,
+        "dst": 1202
+      },
+      "content_name_nlink_sha256": "2da6a0e8f08eea9531457a694fcf1e2964d34e755ed676a94fffd5bffadf4cd5",
+      "identity_sha256": "3acbafe6f3ce0925d511e303a03bfd6105ead38546eca1e8412ccbc4d1eead3d",
+      "negative_checks": 33,
+      "verification_elapsed_ns": 169259264,
+      "drop_caches": 2
+    },
+    {
+      "stage": "fixed_recreate",
+      "files": 2408,
+      "directory_counts": {
+        "src": 1206,
+        "dst": 1202
+      },
+      "content_name_nlink_sha256": "79bb26331fa9bcb7dcfc73a93f1f30cd23045ce4874f6687acc5242cdb1a5270",
+      "identity_sha256": "44c4bea4c708f52a80ae710d0f783f138f77f853cf96d66269114a8e2ac28f0c",
+      "negative_checks": 32,
+      "verification_elapsed_ns": 169618297,
+      "drop_caches": 2
+    },
+    {
+      "stage": "fixed_restored",
+      "files": 2408,
+      "directory_counts": {
+        "src": 1208,
+        "dst": 1200
+      },
+      "content_name_nlink_sha256": "155fd226704069f43710922e1c368a6b3a17147ff62d262236bca4a45d282d22",
+      "identity_sha256": "beef0809f0b4715dd03a8abd6e3ccfd5b03fa2cbc229a9e4e19fca21e00bad3b",
+      "negative_checks": 36,
+      "verification_elapsed_ns": 192263949,
+      "drop_caches": 2
+    },
+    {
+      "stage": "final",
+      "files": 2408,
+      "directory_counts": {
+        "src": 1208,
+        "dst": 1200
+      },
+      "content_name_nlink_sha256": "155fd226704069f43710922e1c368a6b3a17147ff62d262236bca4a45d282d22",
+      "identity_sha256": "beef0809f0b4715dd03a8abd6e3ccfd5b03fa2cbc229a9e4e19fca21e00bad3b",
+      "negative_checks": 40,
+      "verification_elapsed_ns": 166964421,
+      "drop_caches": 2
+    }
+  ],
+  "note": "Correctness only; verification_elapsed_ns is not a benchmark.",
+  "directory_flags": {
+    "src": {
+      "flags_hex": "0x81000",
+      "index_flag": true
+    },
+    "dst": {
+      "flags_hex": "0x81000",
+      "index_flag": true
+    }
+  },
+  "baseline": {
+    "stage": "initial",
+    "files": 2408,
+    "directory_counts": {
+      "src": 1208,
+      "dst": 1200
+    },
+    "content_name_nlink_sha256": "155fd226704069f43710922e1c368a6b3a17147ff62d262236bca4a45d282d22",
+    "identity_sha256": "beef0809f0b4715dd03a8abd6e3ccfd5b03fa2cbc229a9e4e19fca21e00bad3b",
+    "negative_checks": 40,
+    "verification_elapsed_ns": 165158418,
+    "drop_caches": 2
+  },
+  "fixture_retained": false
+}

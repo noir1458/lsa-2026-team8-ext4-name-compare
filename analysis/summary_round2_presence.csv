@@ -1,0 +1,11 @@
+case,kind,5.4.214-b0_us,5.4.214-word_us,5.4.214-tail_us,5.4.214-wordtail_us
+short13,exists,9.313,7.888,6.169,6.149
+short13,missing,10.717,7.495,4.457,4.443
+long128,exists,13.102,8.264,7.524,7.144
+long128,missing,15.990,7.001,4.889,4.901
+random128,exists,7.713,7.394,7.512,7.160
+random128,missing,5.241,5.450,4.893,4.902
+varied,exists,7.026,6.849,6.907,6.748
+varied,missing,4.612,4.671,4.473,4.482
+sametail,exists,7.565,8.104,7.802,8.355
+sametail,missing,6.505,7.807,6.995,8.277

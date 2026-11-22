@@ -1,0 +1,18 @@
+0000000000000110 <memcmp>:
+ 110:	test   %rdx,%rdx
+ 113:	je     132 <memcmp+0x22>
+ 115:	xor    %ecx,%ecx
+ 117:	jmp    122 <memcmp+0x12>
+ 119:	add    $0x1,%rcx
+ 11d:	cmp    %rcx,%rdx
+ 120:	je     131 <memcmp+0x21>
+ 122:	movzbl (%rdi,%rcx,1),%eax
+ 126:	movzbl (%rsi,%rcx,1),%r8d
+ 12b:	sub    %r8d,%eax
+ 12e:	je     119 <memcmp+0x9>
+ 130:	retq   
+ 131:	retq   
+ 132:	xor    %eax,%eax
+ 134:	retq   
+ 135:	data16 nopw %cs:0x0(%rax,%rax,1)
+
