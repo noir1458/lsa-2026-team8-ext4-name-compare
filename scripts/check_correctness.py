@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Correctness check for a kernel where the tail prefilter is always on.
+"""Correctness check of directory name lookup on the running kernel.
 
-The final patch (patches/0004-tail-prefilter-only.patch) has no sysfs switch, so
-this runs one mutation sequence (rename, hardlink, unlink, cross-directory
-rename, replace, recreate) on the running kernel. It also adds names that share their last 8 bytes but differ earlier,
-which is the case the prefilter must not confuse. The same script passes on the
-stock B0 kernel, so the two kernels can be compared on identical checks.
+The patch (patches/ext4-name-tail-compare.patch) has no runtime switch, so this
+runs one mutation sequence (rename, hardlink, unlink, cross-directory rename,
+replace, recreate) on whichever kernel is booted. It also adds names that share
+their last 8 bytes but differ earlier, which is the case the patch must not
+confuse. Every kernel runs the identical check, so the results can be compared.
 
 Only a new check-tail-UUID directory under --root is modified, and it is removed
 on success. Example:

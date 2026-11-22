@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create the four test directories (empty files) and the query lists.
+"""Create the test directories (empty files) and the query lists.
 
 Never formats or mounts a device; make_fixture.sh owns the image.
 Example: make_names.py --parent /mnt/leaf/leaf --output results/names --files 10000
@@ -14,7 +14,9 @@ from pathlib import Path
 import random
 import string
 
-CASES = ("short13", "long128", "random128", "varied")
+CASES = ("short13", "long128", "random128", "varied", "sametail")
+# Round 1 used the first four. sametail is the worst case for the tail patch:
+# every name has the same length and the same last 8 bytes ("port.pdf").
 ALPHABET = string.ascii_letters + string.digits
 
 
@@ -26,6 +28,8 @@ def make_names(case, count, seed):
             name = "file_%08d" % i
         elif case == "long128":
             name = "p" * 120 + "%08d" % i
+        elif case == "sametail":
+            name = "%05d_report.pdf" % i
         elif case == "random128":
             name = "".join(rng.choice(ALPHABET) for _ in range(128))
             while name in seen:
