@@ -1,0 +1,9 @@
+Ubuntu 20.04 VM 시스템 디렉터리 중 항목 100개 이상인 466개 (/usr /etc /var/lib /var/log /lib/modules/5.4.214-b0, 커널 소스 트리)
+디렉터리 안의 서로 다른 이름 쌍 기준. pooled = 모든 쌍을 합친 비율, median = 디렉터리별 비율의 중앙값
+length_differs  pooled  93.74%  median  91.89%
+short           pooled   0.52%  median   0.04%
+tail_differs    pooled   5.56%  median   5.97%
+tail_same       pooled   0.17%  median   0.04%
+prefix_tail_differs  디렉터리 중앙값 0.9바이트 (459개 디렉터리)
+prefix_tail_same     디렉터리 중앙값 1.6바이트 (378개 디렉터리)
+공통 접두사 5바이트 이상인 tail_differs 쌍이 5% 이상인 디렉터리: 32개
