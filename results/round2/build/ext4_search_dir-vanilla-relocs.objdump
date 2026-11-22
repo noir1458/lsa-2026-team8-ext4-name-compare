@@ -1,0 +1,156 @@
+0000000000002830 <ext4_search_dir>:
+    2830:	callq  2835 <ext4_search_dir+0x5>
+			2831: R_X86_64_PLT32	__fentry__-0x4
+    2835:	push   %rbp
+    2836:	mov    %rsp,%rbp
+    2839:	push   %r15
+    283b:	push   %r14
+    283d:	push   %r13
+    283f:	movslq %edx,%r13
+    2842:	push   %r12
+    2844:	add    %rsi,%r13
+    2847:	mov    %r9d,%r12d
+    284a:	push   %rbx
+    284b:	lea    -0x9(%r13),%r9
+    284f:	sub    $0x50,%rsp
+    2853:	mov    0x10(%rbp),%rax
+    2857:	mov    %rdi,-0x60(%rbp)
+    285b:	mov    %edx,-0x64(%rbp)
+    285e:	mov    %rax,-0x70(%rbp)
+    2862:	mov    %gs:0x28,%rax
+    286b:	mov    %rax,-0x30(%rbp)
+    286f:	xor    %eax,%eax
+    2871:	cmp    %r9,%rsi
+    2874:	jae    29a9 <ext4_search_dir+0x179>
+    287a:	mov    %rsi,-0x78(%rbp)
+    287e:	mov    %rsi,%rbx
+    2881:	mov    %rcx,%r14
+    2884:	mov    %r9,%r15
+    2887:	jmp    28a5 <ext4_search_dir+0x75>
+    2889:	movzwl 0x4(%rbx),%edx
+    288d:	test   %dx,%dx
+    2890:	je     29c9 <ext4_search_dir+0x199>
+    2896:	add    %rdx,%rbx
+    2899:	add    %edx,%r12d
+    289c:	cmp    %r15,%rbx
+    289f:	jae    29a9 <ext4_search_dir+0x179>
+    28a5:	movzbl 0x6(%rbx),%edx
+    28a9:	lea    0x8(%rbx),%rdi
+    28ad:	lea    (%rdi,%rdx,1),%rcx
+    28b1:	mov    %rdx,%rax
+    28b4:	cmp    %rcx,%r13
+    28b7:	jb     2889 <ext4_search_dir+0x59>
+    28b9:	mov    (%rbx),%ecx
+    28bb:	movl   $0x0,-0x50(%rbp)
+    28c2:	mov    %edx,-0x4c(%rbp)
+    28c5:	mov    %rdi,-0x48(%rbp)
+    28c9:	test   %ecx,%ecx
+    28cb:	je     2889 <ext4_search_dir+0x59>
+    28cd:	mov    0x28(%r14),%rcx
+    28d1:	mov    (%r8),%rsi
+    28d4:	mov    0x3b8(%rcx),%rcx
+    28db:	cmpq   $0x0,0x218(%rcx)
+    28e3:	je     297f <ext4_search_dir+0x14f>
+    28e9:	testb  $0x80,0xd(%r14)
+    28ee:	je     297f <ext4_search_dir+0x14f>
+    28f4:	mov    0x40(%r8),%rax
+    28f8:	test   %rax,%rax
+    28fb:	je     29d0 <ext4_search_dir+0x1a0>
+    2901:	mov    0x48(%r8),%edx
+    2905:	movl   $0x0,-0x40(%rbp)
+    290c:	mov    $0x1,%ecx
+    2911:	lea    -0x40(%rbp),%rsi
+    2915:	mov    %r8,-0x58(%rbp)
+    2919:	mov    %rax,-0x38(%rbp)
+    291d:	mov    %edx,-0x3c(%rbp)
+    2920:	lea    -0x50(%rbp),%rdx
+    2924:	mov    %r14,%rdi
+    2927:	callq  292c <ext4_search_dir+0xfc>
+			2928: R_X86_64_PLT32	ext4_ci_compare-0x4
+    292c:	mov    -0x58(%rbp),%r8
+    2930:	test   %eax,%eax
+    2932:	sete   %al
+    2935:	test   %al,%al
+    2937:	je     2889 <ext4_search_dir+0x59>
+    293d:	mov    -0x64(%rbp),%eax
+    2940:	mov    %r14,%r15
+    2943:	mov    -0x78(%rbp),%r14
+    2947:	push   %r12
+    2949:	mov    -0x60(%rbp),%r9
+    294d:	mov    %rbx,%r8
+    2950:	xor    %ecx,%ecx
+    2952:	mov    %r15,%rdx
+    2955:	push   %rax
+    2956:	mov    $0x59a,%esi
+    295b:	mov    $0x0,%rdi
+			295e: R_X86_64_32S	.rodata+0x350
+    2962:	push   %r14
+    2964:	callq  2969 <ext4_search_dir+0x139>
+			2965: R_X86_64_PLT32	__ext4_check_dir_entry-0x4
+    2969:	add    $0x18,%rsp
+    296d:	test   %eax,%eax
+    296f:	jne    29c9 <ext4_search_dir+0x199>
+    2971:	mov    -0x70(%rbp),%rax
+    2975:	mov    %rbx,(%rax)
+    2978:	mov    $0x1,%eax
+    297d:	jmp    29ab <ext4_search_dir+0x17b>
+    297f:	mov    0x8(%r8),%r10
+    2983:	test   %r10,%r10
+    2986:	je     29df <ext4_search_dir+0x1af>
+    2988:	cmp    %eax,0x10(%r8)
+    298c:	jne    2889 <ext4_search_dir+0x59>
+    2992:	mov    %r10,%rsi
+    2995:	mov    %r8,-0x58(%rbp)
+    2999:	callq  299e <ext4_search_dir+0x16e>
+			299a: R_X86_64_PLT32	memcmp-0x4
+    299e:	mov    -0x58(%rbp),%r8
+    29a2:	test   %eax,%eax
+    29a4:	sete   %al
+    29a7:	jmp    2935 <ext4_search_dir+0x105>
+    29a9:	xor    %eax,%eax
+    29ab:	mov    -0x30(%rbp),%rsi
+    29af:	xor    %gs:0x28,%rsi
+    29b8:	jne    2a2f <ext4_search_dir+0x1ff>
+    29ba:	lea    -0x28(%rbp),%rsp
+    29be:	pop    %rbx
+    29bf:	pop    %r12
+    29c1:	pop    %r13
+    29c3:	pop    %r14
+    29c5:	pop    %r15
+    29c7:	pop    %rbp
+    29c8:	retq   
+    29c9:	mov    $0xffffffff,%eax
+    29ce:	jmp    29ab <ext4_search_dir+0x17b>
+    29d0:	mov    %r8,-0x58(%rbp)
+    29d4:	xor    %ecx,%ecx
+    29d6:	lea    -0x50(%rbp),%rdx
+    29da:	jmpq   2924 <ext4_search_dir+0xf4>
+    29df:	mov    0x8(%rsi),%rdx
+    29e3:	cmpb   $0x5f,(%rdx)
+    29e6:	jne    2a28 <ext4_search_dir+0x1f8>
+    29e8:	cmp    $0x20,%eax
+    29eb:	jbe    2889 <ext4_search_dir+0x59>
+    29f1:	sub    $0x11,%eax
+    29f4:	and    $0xfffffff0,%eax
+    29f7:	add    %rax,%rdi
+    29fa:	mov    0x30(%r8),%rax
+    29fe:	lea    0x8(%rax),%rdx
+    2a02:	mov    0x8(%rax),%rax
+    2a06:	cmp    %rax,(%rdi)
+    2a09:	je     2a1a <ext4_search_dir+0x1ea>
+    2a0b:	mov    $0x1,%eax
+    2a10:	test   %eax,%eax
+    2a12:	sete   %al
+    2a15:	jmpq   2935 <ext4_search_dir+0x105>
+    2a1a:	mov    0x8(%rdx),%rax
+    2a1e:	cmp    %rax,0x8(%rdi)
+    2a22:	jne    2a0b <ext4_search_dir+0x1db>
+    2a24:	xor    %eax,%eax
+    2a26:	jmp    2a10 <ext4_search_dir+0x1e0>
+    2a28:	ud2    
+    2a2a:	jmpq   2889 <ext4_search_dir+0x59>
+    2a2f:	callq  2a34 <ext4_search_dir+0x204>
+			2a30: R_X86_64_PLT32	__stack_chk_fail-0x4
+    2a34:	data16 nopw %cs:0x0(%rax,%rax,1)
+    2a3f:	nop
+
