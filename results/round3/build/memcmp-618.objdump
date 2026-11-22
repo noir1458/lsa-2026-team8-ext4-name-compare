@@ -1,0 +1,43 @@
+0000000000000570 <memcmp>:
+ 570:	endbr64 
+ 574:	jmp    58a <memcmp+0x1a>
+ 576:	mov    (%rsi),%rax
+ 579:	cmp    %rax,(%rdi)
+ 57c:	jne    595 <memcmp+0x25>
+ 57e:	add    $0x8,%rdi
+ 582:	add    $0x8,%rsi
+ 586:	sub    $0x8,%rdx
+ 58a:	cmp    $0x7,%rdx
+ 58e:	ja     576 <memcmp+0x6>
+ 590:	test   %rdx,%rdx
+ 593:	je     5b5 <memcmp+0x45>
+ 595:	xor    %ecx,%ecx
+ 597:	jmp    5a2 <memcmp+0x32>
+ 599:	add    $0x1,%rcx
+ 59d:	cmp    %rcx,%rdx
+ 5a0:	je     5b0 <memcmp+0x40>
+ 5a2:	movzbl (%rdi,%rcx,1),%eax
+ 5a6:	movzbl (%rsi,%rcx,1),%r8d
+ 5ab:	sub    %r8d,%eax
+ 5ae:	je     599 <memcmp+0x29>
+ 5b0:	jmpq   5b5 <memcmp+0x45>
+ 5b5:	xor    %eax,%eax
+ 5b7:	jmpq   5bc <memcmp+0x4c>
+ 5bc:	nopl   0x0(%rax)
+ 5c0:	nop
+ 5c1:	nop
+ 5c2:	nop
+ 5c3:	nop
+ 5c4:	nop
+ 5c5:	nop
+ 5c6:	nop
+ 5c7:	nop
+ 5c8:	nop
+ 5c9:	nop
+ 5ca:	nop
+ 5cb:	nop
+ 5cc:	nop
+ 5cd:	nop
+ 5ce:	nop
+ 5cf:	nop
+

@@ -1,0 +1,38 @@
+[03:35:11] config from Ubuntu 5.15 generic + localmodconfig
+.config:434:warning: symbol value 'm' invalid for I8K
+.config:875:warning: symbol value '0' invalid for BASE_SMALL
+.config:1995:warning: symbol value 'm' invalid for MCTP
+.config:3204:warning: symbol value 'm' invalid for NET_DSA_REALTEK_SMI
+.config:6723:warning: symbol value 'm' invalid for FB_BACKLIGHT
+.config:7717:warning: symbol value 'm' invalid for USB_FOTG210_HCD
+.config:7950:warning: symbol value 'm' invalid for USB_FOTG210_UDC
+.config:8582:warning: symbol value 'm' invalid for HYPERV
+.config:8856:warning: symbol value 'm' invalid for VIDEO_ZORAN_DC30
+.config:8857:warning: symbol value 'm' invalid for VIDEO_ZORAN_ZR36060
+.config:8858:warning: symbol value 'm' invalid for VIDEO_ZORAN_BUZ
+.config:8859:warning: symbol value 'm' invalid for VIDEO_ZORAN_DC10
+.config:8860:warning: symbol value 'm' invalid for VIDEO_ZORAN_LML33
+.config:8861:warning: symbol value 'm' invalid for VIDEO_ZORAN_LML33R10
+.config:8862:warning: symbol value 'm' invalid for VIDEO_ZORAN_AVS6EYES
+.config:9958:warning: symbol value 'm' invalid for ANDROID_BINDER_IPC
+.config:9959:warning: symbol value 'm' invalid for ANDROID_BINDERFS
+.config:10179:warning: symbol value 'm' invalid for FSCACHE
+.config:10893:warning: symbol value 'm' invalid for CRYPTO_LIB_CURVE25519_GENERIC
+.config:10898:warning: symbol value 'm' invalid for CRYPTO_LIB_POLY1305_GENERIC
+CONFIG_EXT4_FS=y
+CONFIG_BLK_DEV_LOOP=y
+CONFIG_FUNCTION_PROFILER=y
+CONFIG_DEBUG_INFO_NONE=y
+CONFIG_TUN=y
+CONFIG_KERNEL_GZIP=y
+[03:35:24] build b0
+[03:37:14] install b0
+[03:37:31] apply tail patch
+patching file fs/ext4/namei.c
+[03:37:34] build tail
+[03:39:29] install tail
+32c32
+< CONFIG_LOCALVERSION="-b0"
+---
+> CONFIG_LOCALVERSION="-tail"
+[03:39:44] done

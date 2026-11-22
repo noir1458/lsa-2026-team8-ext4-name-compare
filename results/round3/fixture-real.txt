@@ -1,0 +1,7 @@
+photos entries: 9999
+linux files: 65708
+linux directories: 4345
+git HEAD: b57836e49cead73a25de78d293342058ce406169
+tarball sha256: 9abc79b4808c827eb82f8a44313ce6d3ade255949989bb98c11acda7ca3bc5db
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/loop16     3.9G  1.5G  2.3G  39% ~/lsa-ext4-name-compare/fixtures/real-mount

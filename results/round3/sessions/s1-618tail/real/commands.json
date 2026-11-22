@@ -1,0 +1,34 @@
+{
+  "ls_photos": [
+    "ls",
+    "-l",
+    "--time-style=+%s",
+    "fixtures/real-mount/real/photos"
+  ],
+  "find_linux": [
+    "find",
+    "fixtures/real-mount/real/linux",
+    "-path",
+    "fixtures/real-mount/real/linux/.git",
+    "-prune",
+    "-o",
+    "-ls"
+  ],
+  "tar_linux": [
+    "tar",
+    "cf",
+    "/dev/null",
+    "--exclude=.git",
+    "-C",
+    "fixtures/real-mount/real",
+    "linux"
+  ],
+  "git_linux": [
+    "git",
+    "-C",
+    "fixtures/real-mount/real/linux",
+    "--no-optional-locks",
+    "status",
+    "--porcelain"
+  ]
+}

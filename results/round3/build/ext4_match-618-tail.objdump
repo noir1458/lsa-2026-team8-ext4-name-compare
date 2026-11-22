@@ -1,0 +1,113 @@
+00000000000004a0 <ext4_match.part.0>:
+     4a0:	callq  4a5 <ext4_match.part.0+0x5>
+			4a1: R_X86_64_PLT32	__fentry__-0x4
+     4a5:	push   %rbp
+     4a6:	mov    %rdx,%rcx
+     4a9:	mov    %rsp,%rbp
+     4ac:	sub    $0x40,%rsp
+     4b0:	mov    0x10(%rsi),%rdx
+     4b4:	mov    (%rsi),%r9
+     4b7:	mov    %gs:0x0(%rip),%rax        # 4bf <ext4_match.part.0+0x1f>
+			4bb: R_X86_64_PC32	__ref_stack_chk_guard-0x4
+     4bf:	mov    %rax,0x38(%rsp)
+     4c4:	xor    %eax,%eax
+     4c6:	mov    0x8(%rsi),%rax
+     4ca:	mov    %rdx,0x10(%rsp)
+     4cf:	mov    0x38(%rsi),%rdx
+     4d3:	mov    %rax,0x8(%rsp)
+     4d8:	mov    0x30(%rsi),%rax
+     4dc:	mov    %r9,(%rsp)
+     4e0:	mov    %rax,0x20(%rsp)
+     4e5:	mov    0xc(%rdi),%eax
+     4e8:	mov    %rdx,0x28(%rsp)
+     4ed:	mov    %eax,%r8d
+     4f0:	and    $0x4000,%r8d
+     4f7:	test   $0x80,%ah
+     4fa:	je     541 <ext4_match.part.0+0xa1>
+     4fc:	mov    0x28(%rdi),%rax
+     500:	test   %r8d,%r8d
+     503:	jne    521 <ext4_match.part.0+0x81>
+     505:	movzbl 0x6(%rcx),%r8d
+     50a:	add    $0x8,%rcx
+     50e:	lea    0x40(%rsi),%rdx
+     512:	mov    %r9,%rsi
+     515:	callq  51a <ext4_match.part.0+0x7a>
+			516: R_X86_64_PLT32	generic_ci_match-0x4
+     51a:	test   %eax,%eax
+     51c:	setg   %al
+     51f:	jmp    56b <ext4_match.part.0+0xcb>
+     521:	mov    0xb0(%rax),%rax
+     528:	mov    (%rax),%rdx
+     52b:	add    %rdi,%rdx
+     52e:	mov    (%rdx),%rax
+     531:	test   %rax,%rax
+     534:	jne    580 <ext4_match.part.0+0xe0>
+     536:	mov    0xc(%rdi),%r8d
+     53a:	and    $0x4000,%r8d
+     541:	movzbl 0x6(%rcx),%edx
+     545:	lea    0x8(%rcx),%rsi
+     549:	test   %r8d,%r8d
+     54c:	jne    563 <ext4_match.part.0+0xc3>
+     54e:	mov    0x8(%rsp),%rcx
+     553:	test   %rcx,%rcx
+     556:	je     563 <ext4_match.part.0+0xc3>
+     558:	cmp    %edx,0x10(%rsp)
+     55c:	jne    563 <ext4_match.part.0+0xc3>
+     55e:	cmp    $0x7,%dl
+     561:	ja     5c6 <ext4_match.part.0+0x126>
+     563:	mov    %rsp,%rdi
+     566:	callq  56b <ext4_match.part.0+0xcb>
+			567: R_X86_64_PLT32	fscrypt_match_name-0x4
+     56b:	mov    0x38(%rsp),%rcx
+     570:	xor    %gs:0x0(%rip),%rcx        # 578 <ext4_match.part.0+0xd8>
+			574: R_X86_64_PC32	__ref_stack_chk_guard-0x4
+     578:	jne    5d6 <ext4_match.part.0+0x136>
+     57a:	leaveq 
+     57b:	jmpq   580 <ext4_match.part.0+0xe0>
+			57c: R_X86_64_PLT32	__x86_return_thunk-0x4
+     580:	mov    0x28(%rdi),%rax
+     584:	movzbl 0x6(%rcx),%r8d
+     589:	testb  $0x2,0xd0(%rax)
+     590:	je     5be <ext4_match.part.0+0x11e>
+     592:	testb  $0x40,0xd(%rdi)
+     596:	je     5be <ext4_match.part.0+0x11e>
+     598:	cmpq   $0x0,0x48(%rsi)
+     59d:	je     5be <ext4_match.part.0+0x11e>
+     59f:	lea    0xb(%r8),%eax
+     5a3:	and    $0x1fc,%eax
+     5a8:	add    %rcx,%rax
+     5ab:	mov    (%rax),%edx
+     5ad:	cmp    %edx,0x18(%rsi)
+     5b0:	jne    5ba <ext4_match.part.0+0x11a>
+     5b2:	mov    0x4(%rax),%eax
+     5b5:	cmp    %eax,0x1c(%rsi)
+     5b8:	je     5be <ext4_match.part.0+0x11e>
+     5ba:	xor    %eax,%eax
+     5bc:	jmp    56b <ext4_match.part.0+0xcb>
+     5be:	mov    (%rsi),%r9
+     5c1:	jmpq   50a <ext4_match.part.0+0x6a>
+     5c6:	mov    -0x8(%rsi,%rdx,1),%rdi
+     5cb:	cmp    %rdi,-0x8(%rcx,%rdx,1)
+     5d0:	je     563 <ext4_match.part.0+0xc3>
+     5d2:	xor    %eax,%eax
+     5d4:	jmp    56b <ext4_match.part.0+0xcb>
+     5d6:	callq  5db <ext4_match.part.0+0x13b>
+			5d7: R_X86_64_PLT32	__stack_chk_fail-0x4
+     5db:	nopl   0x0(%rax,%rax,1)
+     5e0:	nop
+     5e1:	nop
+     5e2:	nop
+     5e3:	nop
+     5e4:	nop
+     5e5:	nop
+     5e6:	nop
+     5e7:	nop
+     5e8:	nop
+     5e9:	nop
+     5ea:	nop
+     5eb:	nop
+     5ec:	nop
+     5ed:	nop
+     5ee:	nop
+     5ef:	nop
+

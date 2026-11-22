@@ -1,0 +1,2 @@
+-----------I--e----- ~/lsa-ext4-name-compare/fixtures/real-mount/real/photos
+--------------e----- ~/lsa-ext4-name-compare/fixtures/real-mount/real/linux

@@ -1,0 +1,16 @@
+{
+  "kernel": "6.18.64-b0",
+  "reps": 20,
+  "cpu": 0,
+  "seed": 301,
+  "command": "ls -l --color=never <dir>, LC_ALL=C TZ=UTC, stdout captured",
+  "cold": "drop_caches=2 before the run (dentries and inodes dropped, page cache kept)",
+  "warm": "same command immediately after the cold run",
+  "output_sha256": {
+    "short13": "a3069ed35cded988020141aa97b0c7a3abc00dd375da8ad3d6ee5581ac21e676",
+    "long128": "424f00491a4cede9d981f101eb797702fc0c2e24f7f1d737400c02c808a79517",
+    "random128": "dab7d0a2bee681e4a8a61365288dad5b6b329b4a86dec3bda9cb758e768982d6",
+    "sametail": "7178e6d27275839a9033ef9b4e1eadfc4b674007f2348de6137448eefd476413",
+    "varied": "6075cbb17dc918fcd03e9c7609b6b1b359f2ee5677291aedc4bdf1836989c8d1"
+  }
+}

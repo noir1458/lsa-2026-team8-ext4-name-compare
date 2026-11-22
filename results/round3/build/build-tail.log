@@ -1,0 +1,137 @@
+  SYNC    include/config/auto.conf.cmd
+  UPD     include/config/kernel.release
+  UPD     include/generated/utsrelease.h
+  DESCEND objtool
+  INSTALL libsubcmd_headers
+  CALL    scripts/checksyscalls.sh
+  CC      init/version.o
+  AR      init/built-in.a
+  CC      kernel/sys.o
+  CC      fs/ext4/namei.o
+  CC      kernel/module/main.o
+  AR      fs/ext4/built-in.a
+  AR      fs/built-in.a
+  CC      security/integrity/ima/ima_init.o
+  AR      security/integrity/ima/built-in.a
+  AR      kernel/module/built-in.a
+  AR      security/integrity/built-in.a
+  AR      security/built-in.a
+  UPD     kernel/config_data
+  AR      kernel/built-in.a
+  GZIP    kernel/config_data.gz
+  CC [M]  kernel/configs.o
+  CC      drivers/base/firmware_loader/main.o
+  CC [M]  drivers/gpu/drm/vmwgfx/vmwgfx_drv.o
+  LD [M]  drivers/gpu/drm/vmwgfx/vmwgfx.o
+  AR      drivers/base/firmware_loader/built-in.a
+  AR      drivers/base/built-in.a
+  AR      drivers/built-in.a
+  AR      built-in.a
+  AR      vmlinux.a
+  LD      vmlinux.o
+  GEN     .vmlinux.objs
+  MODPOST Module.symvers
+  UPD     include/generated/utsversion.h
+  CC      init/version-timestamp.o
+  CC [M]  .module-common.o
+  KSYMS   .tmp_vmlinux0.kallsyms.S
+  AS      .tmp_vmlinux0.kallsyms.o
+  LD      .tmp_vmlinux1
+  LD [M]  arch/x86/kernel/msr.ko
+  LD [M]  arch/x86/crypto/aesni-intel.ko
+  LD [M]  arch/x86/crypto/ghash-clmulni-intel.ko
+  LD [M]  kernel/configs.ko
+  LD [M]  fs/nls/nls_iso8859-1.ko
+  LD [M]  fs/pstore/ramoops.ko
+  LD [M]  fs/binfmt_misc.ko
+  LD [M]  fs/isofs/isofs.ko
+  LD [M]  fs/autofs/autofs4.ko
+  LD [M]  fs/vboxsf/vboxsf.ko
+  LD [M]  crypto/cryptd.ko
+  LD [M]  lib/reed_solomon/reed_solomon.ko
+  LD [M]  drivers/acpi/video.ko
+  LD [M]  drivers/char/lp.ko
+  LD [M]  drivers/char/ppdev.ko
+  LD [M]  drivers/gpu/drm/clients/drm_client_lib.ko
+  LD [M]  drivers/gpu/drm/drm.ko
+  LD [M]  drivers/gpu/drm/drm_ttm_helper.ko
+  LD [M]  drivers/gpu/drm/drm_kms_helper.ko
+  LD [M]  drivers/gpu/drm/ttm/ttm.ko
+  LD [M]  drivers/gpu/drm/vmwgfx/vmwgfx.ko
+  LD [M]  drivers/macintosh/mac_hid.ko
+  LD [M]  drivers/ata/ahci.ko
+  LD [M]  drivers/ata/libahci.ko
+  LD [M]  drivers/ata/acard-ahci.ko
+  LD [M]  drivers/ata/ahci_platform.ko
+  LD [M]  drivers/ata/libahci_platform.ko
+  LD [M]  drivers/ata/pata_acpi.ko
+  LD [M]  drivers/net/ethernet/intel/e1000/e1000.ko
+  LD [M]  drivers/input/serio/serio_raw.ko
+  LD [M]  drivers/input/mouse/psmouse.ko
+  LD [M]  drivers/input/input-leds.ko
+  LD [M]  drivers/input/joydev.ko
+  LD [M]  drivers/i2c/busses/i2c-piix4.ko
+  LD [M]  drivers/i2c/i2c-smbus.ko
+  LD [M]  drivers/firmware/efi/efi-pstore.ko
+  LD [M]  drivers/hid/hid.ko
+  LD [M]  drivers/hid/hid-generic.ko
+  LD [M]  drivers/hid/usbhid/usbhid.ko
+  LD [M]  drivers/platform/x86/wmi.ko
+  LD [M]  drivers/virt/vboxguest/vboxguest.ko
+  LD [M]  drivers/powercap/intel_rapl_common.ko
+  LD [M]  drivers/powercap/intel_rapl_msr.ko
+  LD [M]  drivers/parport/parport.ko
+  LD [M]  drivers/parport/parport_pc.ko
+  LD [M]  sound/soundcore.ko
+  LD [M]  sound/core/snd.ko
+  LD [M]  sound/core/snd-timer.ko
+  LD [M]  sound/core/snd-pcm.ko
+  LD [M]  sound/core/snd-seq-device.ko
+  LD [M]  sound/core/seq/snd-seq.ko
+  LD [M]  sound/pci/snd-intel8x0.ko
+  LD [M]  sound/pci/ac97/snd-ac97-codec.ko
+  LD [M]  sound/ac97_bus.ko
+  LD [M]  net/sched/sch_fq_codel.ko
+  LD [M]  net/netfilter/nfnetlink.ko
+  LD [M]  net/netfilter/nf_conntrack.ko
+  LD [M]  net/netfilter/nf_nat.ko
+  LD [M]  net/netfilter/nf_tables.ko
+  LD [M]  net/netfilter/x_tables.ko
+  LD [M]  net/netfilter/xt_tcpudp.ko
+  LD [M]  net/netfilter/xt_mark.ko
+  LD [M]  net/netfilter/xt_connmark.ko
+  LD [M]  net/netfilter/xt_MASQUERADE.ko
+  LD [M]  net/netfilter/xt_conntrack.ko
+  LD [M]  net/ipv4/netfilter/nf_defrag_ipv4.ko
+  LD [M]  net/ipv6/netfilter/nf_defrag_ipv6.ko
+  LD [M]  arch/x86/events/rapl.ko
+  NM      .tmp_vmlinux1.syms
+  KSYMS   .tmp_vmlinux1.kallsyms.S
+  AS      .tmp_vmlinux1.kallsyms.o
+  LD      .tmp_vmlinux2
+  NM      .tmp_vmlinux2.syms
+  KSYMS   .tmp_vmlinux2.kallsyms.S
+  AS      .tmp_vmlinux2.kallsyms.o
+  LD      vmlinux.unstripped
+  NM      System.map
+  SORTTAB vmlinux.unstripped
+  OBJCOPY vmlinux
+  GEN     modules.builtin.modinfo
+  GEN     modules.builtin
+  CC      arch/x86/boot/version.o
+  VOFFSET arch/x86/boot/compressed/../voffset.h
+  OBJCOPY arch/x86/boot/compressed/vmlinux.bin
+  RELOCS  arch/x86/boot/compressed/vmlinux.relocs
+  CC      arch/x86/boot/compressed/kaslr.o
+  CC      arch/x86/boot/compressed/misc.o
+  GZIP    arch/x86/boot/compressed/vmlinux.bin.gz
+  MKPIGGY arch/x86/boot/compressed/piggy.S
+  AS      arch/x86/boot/compressed/piggy.o
+  LD      arch/x86/boot/compressed/vmlinux
+  ZOFFSET arch/x86/boot/zoffset.h
+  OBJCOPY arch/x86/boot/vmlinux.bin
+  AS      arch/x86/boot/header.o
+  LD      arch/x86/boot/setup.elf
+  OBJCOPY arch/x86/boot/setup.bin
+  BUILD   arch/x86/boot/bzImage
+Kernel: arch/x86/boot/bzImage is ready  (#3)
