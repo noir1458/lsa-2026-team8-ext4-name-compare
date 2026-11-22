@@ -7,6 +7,8 @@ analysis/ 에 요약표 3개와 그림 2장을 만든다.
   summary_lookup.csv   세션별 이름 조회 시간 (질의 하나당 µs, 세션 안 40회의 중앙값·최소·최대)
   summary_ls.csv       세션별 ls -l 시간 (ms, 세션 안 20회의 중앙값·최소·최대)
   summary_change.csv   커널별 세션 중앙값의 중앙값, 변화율, 세션 범위가 겹치는지, 쌍별 변화율
+  summary_presence.csv 있는 이름 / 없는 이름으로 나눈 조회 시간과, 있는 이름에서 줄어든 시간 × 10,000을
+                       ls -l(cold)에서 실제로 줄어든 시간과 나란히 놓은 표 (lookup/presence.csv 필요)
   fig1_lookup.png      이름 조회 시간
   fig2_ls.png          ls -l 시간
 
@@ -182,6 +184,38 @@ def correctness(found):
     return out
 
 
+def presence(found, ls_cmp):
+    """세션별 presence.csv(scripts/split_presence.py)에서 dentry 캐시를 비운 뒤의 조회만 본다."""
+    per = {}
+    for name, (kernel, path) in found.items():
+        with open(os.path.join(path, "lookup", "presence.csv"), newline="") as f:
+            for row in csv.DictReader(f):
+                if row["cache"] != "warmdir":
+                    continue
+                for kind in ("exists", "missing"):
+                    per.setdefault((row["case"], kind, kernel, name), []).append(
+                        float(row[kind + "_median_ns"]) / 1000)
+    def med(case, kind, kernel):
+        return statistics.median(statistics.median(v) for (c, k, kn, _), v in per.items()
+                                 if (c, k, kn) == (case, kind, kernel))
+    rows = []
+    for case, _ in CASES:
+        b0, tail = KERNELS[0][0], KERNELS[1][0]
+        e0, e1, m0, m1 = med(case, "exists", b0), med(case, "exists", tail), med(case, "missing", b0), med(case, "missing", tail)
+        files = 10000
+        r = ls_cmp[(case, "cold")]
+        rows.append([case, "%.3f" % e0, "%.3f" % e1, "%.1f" % (100 * (e1 / e0 - 1)),
+                     "%.3f" % m0, "%.3f" % m1, "%.1f" % (100 * (m1 / m0 - 1)),
+                     "%.1f" % ((e0 - e1) * files / 1000), "%.1f" % (r["b0_median"] - r["tail_median"])])
+    with open(os.path.join(OUT, "summary_presence.csv"), "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["case", "b0_exists_us", "tail_exists_us", "exists_change_pct",
+                    "b0_missing_us", "tail_missing_us", "missing_change_pct",
+                    "exists_saving_x10000_ms", "ls_cold_saving_ms"])
+        w.writerows(rows)
+    return rows
+
+
 def main():
     found = sessions()
     lookup, ls = load(found)
@@ -195,6 +229,8 @@ def main():
     figure(os.path.join(OUT, "fig2_ls.png"), "ls -l 한 번에 걸린 시간",
            "파일 10,000개 디렉터리에서 ls -l (이름마다 lstat). 숫자는 B0 대비 tail의 변화(주황: 부팅별 범위가 겹치지 않음)",
            ls_cmp, LS_MODES, "ms")
+    for row in presence(found, ls_cmp):
+        print("presence", *row)
     for name, row in sorted(correctness(found).items()):
         print("correctness", name, *row)
     for (case, mode), r in lookup_cmp.items():
