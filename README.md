@@ -107,6 +107,8 @@ results/   원자료 (부팅별 세션, 빌드 기록)
 analysis/  요약표와 그림을 만드는 스크립트
 ```
 
+질의 하나하나의 시간(`lookup_bench --latencies`, 세션 8개 합계 2.5 GB)은 크기 때문에 넣지 않았다. 시행마다의 평균, p50, p95, p99, 최소, 최대는 `results/sessions/<세션>/lookup/summary.csv`에 있고, 시행별 원래 출력은 같은 폴더의 `trials.tar.gz`에 있다.
+
 ## 재현 방법
 
 ### 1. 커널 두 개 빌드
