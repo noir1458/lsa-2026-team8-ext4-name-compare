@@ -1,0 +1,1 @@
+Linux vm 6.18.64-tail #3 SMP PREEMPT_DYNAMIC Mon Nov 23 03:38:29 KST 2026 x86_64 x86_64 x86_64 GNU/Linux

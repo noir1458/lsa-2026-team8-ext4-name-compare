@@ -1,0 +1,1 @@
+Linux vm 5.4.214-tail #3 SMP Sun Nov 22 16:58:22 KST 2026 x86_64 x86_64 x86_64 GNU/Linux

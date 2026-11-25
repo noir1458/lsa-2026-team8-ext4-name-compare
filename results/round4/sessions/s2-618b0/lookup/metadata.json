@@ -1,0 +1,105 @@
+{
+  "phase": "session",
+  "kernel": "6.18.64-b0",
+  "seed": 402,
+  "rounds": 10,
+  "drop_caches": 2,
+  "cpu": 0,
+  "cases": [
+    {
+      "case": "short13",
+      "directory": "short13",
+      "names_file": "short13.names",
+      "positive": 10000,
+      "negative": 10000,
+      "positive_length_histogram": {
+        "13": 10000
+      },
+      "negative_length_histogram": {
+        "13": 10000
+      },
+      "names_sha256": "2d29c50be0243c376ec5b70dce1eb3e7eb686b48e3179bd22c63f6d216b0ce0a",
+      "creation_order_sha256": "494509d7b4cc22c7c5c3db1a110ef7c5f90601aa82f4f3b941318477ee91d59f"
+    },
+    {
+      "case": "long128",
+      "directory": "long128",
+      "names_file": "long128.names",
+      "positive": 10000,
+      "negative": 10000,
+      "positive_length_histogram": {
+        "128": 10000
+      },
+      "negative_length_histogram": {
+        "128": 10000
+      },
+      "names_sha256": "fea43dd3cf347c5f8820582b3038f80a54f84fd564ce00794426cf77914853e2",
+      "creation_order_sha256": "52220383523b91a1983f8348125abed271a05c019fba188a236b48d63a2c8c2b"
+    },
+    {
+      "case": "random128",
+      "directory": "random128",
+      "names_file": "random128.names",
+      "positive": 10000,
+      "negative": 10000,
+      "positive_length_histogram": {
+        "128": 10000
+      },
+      "negative_length_histogram": {
+        "128": 10000
+      },
+      "names_sha256": "3fcb4e7e8f95fcbddfb72a69a61705b09218f33f9c084d3fb1bd043b69ee13a3",
+      "creation_order_sha256": "722a01d7a81ee778f8f2f5986def474e4ef0c0180785ad87e0c69b71106a1fa0"
+    },
+    {
+      "case": "varied",
+      "directory": "varied",
+      "names_file": "varied.names",
+      "positive": 10000,
+      "negative": 10000,
+      "positive_length_histogram": {
+        "13": 2000,
+        "32": 2000,
+        "64": 2000,
+        "128": 2000,
+        "240": 2000
+      },
+      "negative_length_histogram": {
+        "13": 2000,
+        "32": 2000,
+        "64": 2000,
+        "128": 2000,
+        "240": 2000
+      },
+      "names_sha256": "8b4c462232100cf3294fd97587f2b944a285b84970e55bd4d73936552d1c03c7",
+      "creation_order_sha256": "1d92ed3dcd77055ca60c4251f5224b44f1776119761dd40f26d7caf7b18f3269"
+    },
+    {
+      "case": "sametail",
+      "directory": "sametail",
+      "names_file": "sametail.names",
+      "positive": 10000,
+      "negative": 10000,
+      "positive_length_histogram": {
+        "16": 10000
+      },
+      "negative_length_histogram": {
+        "16": 10000
+      },
+      "names_sha256": "5b5e012fe103b82a3bc81002b03a09123e3ba1d7155c6f320253f7af970ee1b3",
+      "creation_order_sha256": "39f07d8744646cfba97b982475359b93b20c7ff2d2a056297d910cf83e03fea1"
+    }
+  ],
+  "modes": [
+    "warmdir",
+    "warm"
+  ],
+  "labels": [
+    "run1",
+    "run2"
+  ],
+  "benchmark_sha256": "0b891ca0732f873d9232c846d6fd1fd94a6f0d5b45e996325e438de0303a1a03",
+  "metric": "elapsed_ns / queries; per-call timing is a separate field",
+  "cache_note": "warmdir enumerates names after drop_caches=2; warm also looks up all names once",
+  "comparison_note": "B0 and tail are separate boot sessions; compare session summaries, not rows"
+}

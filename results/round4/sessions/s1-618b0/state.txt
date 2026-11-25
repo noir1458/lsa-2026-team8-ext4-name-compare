@@ -1,0 +1,4 @@
+start 2026-11-25T15:49:05+0900 len 10: 5.26 ns/call, 0.526 ns/byte len 120: 57.11 ns/call, 0.476 ns/byte 
+lookup-done 2026-11-25T15:49:45+0900 len 10: 5.14 ns/call, 0.514 ns/byte len 120: 57.06 ns/call, 0.475 ns/byte 
+ls-done 2026-11-25T15:50:04+0900 len 10: 5.14 ns/call, 0.514 ns/byte len 120: 57.72 ns/call, 0.481 ns/byte 
+end 2026-11-25T15:50:45+0900 len 10: 5.14 ns/call, 0.514 ns/byte len 120: 57.30 ns/call, 0.477 ns/byte 
