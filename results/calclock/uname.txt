@@ -1,0 +1,1 @@
+Linux vm 5.4.214-b0 #1 SMP Sun Nov 15 20:24:37 KST 2026 x86_64

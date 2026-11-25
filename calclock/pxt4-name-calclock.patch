@@ -1,0 +1,174 @@
+--- a/namei.c
++++ b/namei.c
+@@ -43,6 +43,34 @@
+ #include "acl.h"
+ 
+ #include <trace/events/pxt4.h>
++
++#ifdef NAME_CALCLOCK
++#include "calclock.h"
++KTDEF(pxt4_lookup);
++KTDEF(pxt4_search_dir);
++#endif
++
++#ifdef NAME_COUNT
++#include "ds_monitoring.h"
++/* where one directory entry is decided */
++enum { NAME_LEN_DIFFERS = 1, NAME_TAIL_DIFFERS, NAME_FULL_COMPARE };
++static const char *const name_step[] = {
++	[NAME_LEN_DIFFERS] = "length_differs",
++	[NAME_TAIL_DIFFERS] = "last_8_bytes_differ",
++	[NAME_FULL_COMPARE] = "full_compare",
++};
++static unsigned long get_step_idx(void *elem) { return *(int *)elem; }
++static const char *get_step_name(void *elem) { return name_step[*(int *)elem]; }
++static void print_step_dm(unsigned long index, const char *name,
++			  unsigned long long count, int percentage)
++{
++	printk("name_compare %s: %llu times (%d%%)\n", name, count, percentage);
++}
++DEFINE_DS_MONITORING(name_dm, get_step_idx, get_step_name, print_step_dm);
++#define name_count(step) do { int __s = (step); find_ds_monitoring(&name_dm, &__s); } while (0)
++#else
++#define name_count(step) do { } while (0)
++#endif
+ /*
+  * define how far ahead to read directories while searching them.
+  */
+@@ -1408,16 +1436,59 @@
+ 	}
+ #endif
+ 
++#ifdef NAME_COUNT
++	if (f.disk_name.len != de->name_len)
++		name_count(NAME_LEN_DIFFERS);
++#endif
++#ifdef NAME_TAIL
++	/* the submitted change (patches/ext4-name-tail-compare.patch) */
++	if (!IS_ENCRYPTED(parent) && f.disk_name.name &&
++	    f.disk_name.len == de->name_len && de->name_len >= 8 &&
++	    memcmp(de->name + de->name_len - 8,
++		   f.disk_name.name + de->name_len - 8, 8)) {
++		name_count(NAME_TAIL_DIFFERS);
++		return false;
++	}
++#endif
++#ifdef NAME_COUNT
++	if (f.disk_name.len == de->name_len)
++		name_count(NAME_FULL_COMPARE);
++#endif
++
+ 	return fscrypt_match_name(&f, de->name, de->name_len);
+ }
+ 
+ /*
+  * Returns 0 if not found, -1 on failure, and 1 on success
+  */
++#ifdef NAME_CALCLOCK
++static int pxt4_search_dir_internal(struct buffer_head *bh, char *search_buf,
++		    int buf_size, struct inode *dir, struct pxt4_filename *fname,
++		    unsigned int offset, struct pxt4_dir_entry_2 **res_dir);
++
+ int pxt4_search_dir(struct buffer_head *bh, char *search_buf, int buf_size,
+ 		    struct inode *dir, struct pxt4_filename *fname,
+ 		    unsigned int offset, struct pxt4_dir_entry_2 **res_dir)
+ {
++	int ret;
++	ktime_t localclock[2];
++
++	ktget(&localclock[0]);
++	ret = pxt4_search_dir_internal(bh, search_buf, buf_size, dir, fname,
++				       offset, res_dir);
++	ktget(&localclock[1]);
++	ktput(localclock, pxt4_search_dir);
++	return ret;
++}
++
++static noinline int pxt4_search_dir_internal(struct buffer_head *bh,
++		    char *search_buf, int buf_size,
++#else
++int pxt4_search_dir(struct buffer_head *bh, char *search_buf, int buf_size,
++#endif
++		    struct inode *dir, struct pxt4_filename *fname,
++		    unsigned int offset, struct pxt4_dir_entry_2 **res_dir)
++{
+ 	struct pxt4_dir_entry_2 * de;
+ 	char * dlimit;
+ 	int de_len;
+@@ -1710,9 +1781,29 @@
+ success:
+ 	dx_release(frames);
+ 	return bh;
++}
++
++#ifdef NAME_CALCLOCK
++static struct dentry *pxt4_lookup_internal(struct inode *dir,
++					   struct dentry *dentry, unsigned int flags);
++
++static struct dentry *pxt4_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
++{
++	struct dentry *ret;
++	ktime_t localclock[2];
++
++	ktget(&localclock[0]);
++	ret = pxt4_lookup_internal(dir, dentry, flags);
++	ktget(&localclock[1]);
++	ktput(localclock, pxt4_lookup);
++	return ret;
+ }
+ 
++static noinline struct dentry *pxt4_lookup_internal(struct inode *dir,
++					   struct dentry *dentry, unsigned int flags)
++#else
+ static struct dentry *pxt4_lookup(struct inode *dir, struct dentry *dentry, unsigned int flags)
++#endif
+ {
+ 	struct inode *inode;
+ 	struct pxt4_dir_entry_2 *de;
+--- a/super.c
++++ b/super.c
+@@ -58,6 +58,18 @@
+ #define CREATE_TRACE_POINTS
+ #include <trace/events/pxt4.h>
+ 
++#ifdef NAME_CALCLOCK
++#include "calclock.h"
++KTDEC(pxt4_lookup);
++KTDEC(pxt4_search_dir);
++/* the cost of one ktget pair, printed at exit */
++static KTDEF(empty_pair);
++#endif
++#ifdef NAME_COUNT
++#include "ds_monitoring.h"
++DECLARE_DS_MONITORING(name_dm);
++#endif
++
+ static struct pxt4_lazy_init *pxt4_li_info;
+ static struct mutex pxt4_li_mtx;
+ static struct ratelimit_state pxt4_mount_msg_ratelimit;
+@@ -6348,6 +6360,25 @@
+ 	pxt4_exit_post_read_processing();
+ 	pxt4_exit_es();
+ 	pxt4_exit_pending();
++#ifdef NAME_CALCLOCK
++	{
++		ktime_t localclock[2];
++		int i;
++
++		for (i = 0; i < 100000; i++) {
++			ktget(&localclock[0]);
++			ktget(&localclock[1]);
++			ktput(localclock, empty_pair);
++		}
++	}
++	ktprint(1, pxt4_lookup);
++	ktprint(2, pxt4_search_dir);
++	ktprint(1, empty_pair);
++#endif
++#ifdef NAME_COUNT
++	print_ds_monitoring(&name_dm);
++	delete_ds_monitoring(&name_dm);
++#endif
+ }
+ 
+ MODULE_AUTHOR("Remy Card, Stephen Tweedie, Andrew Morton, Andreas Dilger, Theodore Ts'o and others");

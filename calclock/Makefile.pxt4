@@ -1,0 +1,18 @@
+obj-m += pxt4.o
+
+KBUILD_EXTRA_SYMBOLS := $(src)/jbd3/Module.symvers
+ccflags-y += -I$(src)/include -DPXT4_SUPER_MAGIC=0xEF53 $(NAME_FLAGS)
+
+pxt4-y	:= balloc.o bitmap.o block_validity.o dir.o pxt4_jbd3.o extents.o \
+		extents_status.o file.o fsmap.o fsync.o hash.o ialloc.o \
+		indirect.o inline.o inode.o ioctl.o mballoc.o migrate.o \
+		mmp.o move_extent.o namei.o page-io.o readpage.o resize.o \
+		super.o symlink.o sysfs.o xattr.o xattr_trusted.o xattr_user.o
+
+# each build links only the practice tool it uses (ds_monitoring.c needs DEFINE_DS_MONITORING)
+pxt4-$(if $(findstring NAME_CALCLOCK,$(NAME_FLAGS)),y) += calclock.o
+pxt4-$(if $(findstring NAME_COUNT,$(NAME_FLAGS)),y) += ds_monitoring.o
+
+pxt4-$(CONFIG_EXT4_FS_POSIX_ACL)	+= acl.o
+pxt4-$(CONFIG_EXT4_FS_SECURITY)		+= xattr_security.o
+pxt4-$(CONFIG_FS_VERITY)		+= verity.o

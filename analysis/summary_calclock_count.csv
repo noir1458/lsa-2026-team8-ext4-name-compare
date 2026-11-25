@@ -1,0 +1,13 @@
+workload,variant,entries,length_differs,last_8_bytes_differ,full_compare,full_compare_pct
+lookup_long128,orig,334574,5,0,334569,100.00
+lookup_long128,tail,334574,5,324566,10003,2.99
+lookup_random128,orig,335280,7,0,335273,100.00
+lookup_random128,tail,335280,7,325271,10002,2.98
+lookup_sametail,orig,1963358,9,0,1963349,100.00
+lookup_sametail,tail,1963358,9,0,1963349,100.00
+lookup_short13,orig,1899616,5,0,1899611,100.00
+lookup_short13,tail,1899616,5,1889609,10002,0.53
+lookup_varied,orig,438162,342763,0,95399,21.77
+lookup_varied,tail,438162,342763,85397,10002,2.28
+ls_photos,orig,797569,3,0,797566,100.00
+ls_photos,tail,797569,3,787566,10000,1.25
