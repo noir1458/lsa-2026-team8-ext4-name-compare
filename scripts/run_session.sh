@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # One boot session: run on the VM as root after booting a kernel once.
 #
-# Usage: run_session.sh <work-dir> <expected-kernel> <session> <seed> [check|-] [round2|round3]
+# Usage: run_session.sh <work-dir> <expected-kernel> <session> <seed> [check|-] [round2|round3|round4]
 #   session: a new name such as s1-b0 or s1-tail (results/sessions/<session>)
 #   seed:    use the same seed for every kernel's session in one pair or block
 #   check:   run the correctness check on a new 64 MiB image first
@@ -9,6 +9,8 @@
 #   round3:  round2 directories (10 rounds), then real programs on fixtures/real.img
 #            (scripts/run_real.py) and the ftrace profile (scripts/run_profile.py);
 #            writes to results/round3/sessions/<session>
+#   round4:  the same as round3, plus a CPU speed check (bench/cpu_state) before, between and
+#            after the measurements; writes to results/round4/sessions/<session>
 #
 # The test image is mounted read-only, so every session sees the same directories.
 set -euo pipefail
@@ -26,6 +28,7 @@ case $round in
   "")     leaf=fixtures/leaf.img; names=results/names; out="results/sessions/$session" ;;
   round2) leaf=fixtures/round2.img; names=results/round2/names; out="results/round2/sessions/$session" ;;
   round3) leaf=fixtures/round2.img; names=results/round2/names; out="results/round3/sessions/$session"; rounds=10 ;;
+  round4) leaf=fixtures/round2.img; names=results/round2/names; out="results/round4/sessions/$session"; rounds=10 ;;
   *) echo "unknown round: $round" >&2; exit 2 ;;
 esac
 [[ ! -e $out ]] || { echo "session output exists: $out" >&2; exit 2; }
@@ -33,6 +36,10 @@ mkdir -p "$out"
 trap 'echo $? > "$out/exit"' EXIT
 mnt=fixtures/leaf-mount
 if mountpoint -q "$mnt"; then echo "test image already mounted" >&2; exit 2; fi
+state() {
+  [[ $round = round4 ]] || return 0
+  echo "$1 $(date +%Y-%m-%dT%H:%M:%S%z) $(taskset -c 0 bench/cpu_state | tr '\n' ' ')" >> "$out/state.txt"
+}
 uname -a > "$out/uname.txt"
 cat /proc/cmdline > "$out/cmdline.txt"
 
@@ -56,12 +63,15 @@ mkdir -p "$mnt"
 mount -o loop,ro,noatime "$leaf" "$mnt"
 python3 scripts/wait_idle.py > "$out/settle.log"
 python3 scripts/capture_environment.py > "$out/environment.json"
+state start
 python3 scripts/run_lookup.py --expected-kernel "$kernel" --bench bench/lookup_bench \
   --fixtures "$mnt/leaf" --names "$names" --output "$out/lookup" \
   --rounds "$rounds" --modes warmdir,warm --drop-caches 2 --cpu 0 --seed "$seed" > "$out/lookup.log"
+state lookup-done
 python3 scripts/run_ls.py --expected-kernel "$kernel" --fixtures "$mnt/leaf" \
   --names "$names" --output "$out/ls" --reps 20 --cpu 0 --seed "$seed" > "$out/ls.log"
-if [[ $round = round3 ]]; then
+state ls-done
+if [[ $round = round3 || $round = round4 ]]; then
   rmnt=fixtures/real-mount
   mkdir -p "$rmnt"
   mount -o loop,ro,noatime fixtures/real.img "$rmnt"
@@ -69,6 +79,7 @@ if [[ $round = round3 ]]; then
     --output "$out/real" --rounds 10 --cpu 0 --seed "$seed" > "$out/real.log"
   python3 scripts/run_profile.py --expected-kernel "$kernel" --bench bench/lookup_bench \
     --synthetic "$mnt/leaf" --names "$names" --real "$rmnt/real" --output "$out/profile" --cpu 0 > "$out/profile.log"
+  state end
   umount "$rmnt"
   e2fsck -fn fixtures/real.img > "$out/real-fsck.log" 2>&1
 fi
